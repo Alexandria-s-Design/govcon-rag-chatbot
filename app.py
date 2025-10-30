@@ -35,10 +35,39 @@ st.markdown("""
     }
 
     .main .block-container {
-        padding: 0;
-        max-width: 100%;
-        height: 100vh;
-        overflow: hidden;
+        padding: 0 !important;
+        max-width: 100% !important;
+        height: 100vh !important;
+        overflow: hidden !important;
+    }
+
+    /* Remove all Streamlit default spacing */
+    .block-container {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    div[data-testid="stVerticalBlock"] {
+        gap: 0 !important;
+    }
+
+    div[data-testid="stVerticalBlock"] > div {
+        gap: 0 !important;
+    }
+
+    div[data-testid="column"] {
+        padding: 0 !important;
+    }
+
+    section[data-testid="stSidebar"] {
+        display: none !important;
+    }
+
+    /* Force full height */
+    .element-container {
+        margin: 0 !important;
     }
 
     /* === PREMIUM HEADER === */
@@ -99,9 +128,11 @@ st.markdown("""
 
     /* === MAIN CONTENT AREA === */
     .content-wrapper {
-        height: calc(100vh - 104px);
-        padding: 32px 48px 48px;
+        height: calc(100vh - 100px);
+        padding: 24px 48px 32px;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
 
     /* === CHAT INTERFACE === */
@@ -345,6 +376,15 @@ st.markdown("""
         gap: 12px;
         align-items: center;
         transition: all 0.3s ease;
+    }
+
+    /* Fix column spacing in input area */
+    .input-zone .row-widget {
+        gap: 12px !important;
+    }
+
+    .input-zone [data-testid="column"] {
+        padding: 0 !important;
     }
 
     .input-zone:focus-within {
