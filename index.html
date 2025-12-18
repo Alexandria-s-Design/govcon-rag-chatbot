@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GovCon Intelligence | Government Contracting Advisory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Professional palette - navy, warm gold, neutral grays */
+            --navy-900: #0f172a;
+            --navy-800: #1e293b;
+            --navy-700: #334155;
+            --navy-600: #475569;
+            --navy-500: #64748b;
+            --gold-500: #d4a574;
+            --gold-600: #b8935f;
+            --gold-700: #9c7a4a;
+            --cream: #faf8f5;
+            --white: #ffffff;
+            --green-500: #10b981;
+            --red-500: #ef4444;
+
+            /* Typography */
+            --font-display: 'Crimson Pro', serif;
+            --font-body: 'DM Sans', sans-serif;
+
+            /* Spacing */
+            --header-height: 80px;
+            --input-height: 140px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--cream);
+            color: var(--navy-900);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--navy-900);
+            border-bottom: 3px solid var(--gold-500);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold-500), var(--gold-700));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+
+        .brand-subtitle {
+            font-size: 13px;
+            color: var(--gold-500);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gold-500);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--navy-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main Container */
+        .main-container {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            right: 0;
+            bottom: var(--input-height);
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            background: var(--white);
+            border-right: 1px solid rgba(15, 23, 42, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            padding: 24px 24px 20px;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        }
+
+        .sidebar-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy-900);
+            margin-bottom: 8px;
+        }
+
+        .sidebar-desc {
+            font-size: 13px;
+            color: var(--navy-600);
+            line-height: 1.5;
+        }
+
+        .quick-topics {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .topic-category {
+            margin-bottom: 24px;
+        }
+
+        .category-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--navy-500);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+            padding: 0 8px;
+        }
+
+        .topic-button {
+            width: 100%;
+            padding: 14px 16px;
+            background: transparent;
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--navy-700);
+            line-height: 1.4;
+        }
+
+        .topic-button:hover {
+            background: var(--cream);
+            border-color: var(--gold-500);
+            color: var(--navy-900);
+            transform: translateX(4px);
+        }
+
+        /* Chat Area */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--cream);
+        }
+
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            scroll-behavior: smooth;
+        }
+
+        .messages-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .messages-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .messages-container::-webkit-scrollbar-thumb {
+            background: var(--navy-500);
+            border-radius: 4px;
+        }
+
+        /* Welcome Screen */
+        .welcome {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 80px 20px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .welcome-icon {
+            font-size: 80px;
+            margin-bottom: 32px;
+            filter: drop-shadow(0 4px 8px rgba(212, 165, 116, 0.2));
+        }
+
+        .welcome-title {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--navy-900);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .welcome-subtitle {
+            font-size: 18px;
+            color: var(--navy-600);
+            line-height: 1.7;
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .expertise-card {
+            background: var(--white);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .expertise-card:hover {
+            border-color: var(--gold-500);
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .expertise-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .expertise-title {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--navy-900);
+        }
+
+        /* Message Styles */
+        .message {
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: messageSlide 0.4s ease forwards;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .message-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .avatar-user {
+            background: linear-gradient(135deg, var(--navy-700), var(--navy-900));
+        }
+
+        .avatar-assistant {
+            background: linear-gradient(135deg, var(--gold-500), var(--gold-700));
+        }
+
+        .message-role {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--navy-700);
+            letter-spacing: 0.3px;
+        }
+
+        .message-timestamp {
+            font-size: 12px;
+            color: var(--navy-500);
+            margin-left: auto;
+        }
+
+        .message-content {
+            margin-left: 54px;
+            background: var(--white);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            border-radius: 12px;
+            padding: 20px 24px;
+            line-height: 1.7;
+            font-size: 15px;
+            color: var(--navy-800);
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+        }
+
+        .message-user .message-content {
+            background: var(--navy-900);
+            color: var(--cream);
+            border-color: var(--navy-900);
+        }
+
+        .message-meta {
+            margin-left: 54px;
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .source-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--white);
+            border: 1px solid var(--gold-500);
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--navy-700);
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .source-badge:hover {
+            background: var(--gold-500);
+            color: var(--navy-900);
+        }
+
+        .confidence-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--green-500);
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--green-500);
+            font-weight: 600;
+        }
+
+        /* Input Area */
+        .input-area {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--input-height);
+            background: var(--white);
+            border-top: 1px solid rgba(15, 23, 42, 0.1);
+            padding: 24px 40px;
+            z-index: 999;
+        }
+
+        .input-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .input-field {
+            flex: 1;
+            padding: 16px 20px;
+            background: var(--cream);
+            border: 2px solid rgba(15, 23, 42, 0.1);
+            border-radius: 10px;
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: var(--navy-900);
+            resize: none;
+            transition: all 0.2s ease;
+            min-height: 56px;
+            max-height: 120px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--gold-500);
+            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+        }
+
+        .input-field::placeholder {
+            color: var(--navy-500);
+        }
+
+        .send-button {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--gold-500), var(--gold-700));
+            border: none;
+            border-radius: 10px;
+            color: var(--navy-900);
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+            white-space: nowrap;
+        }
+
+        .send-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .input-hint {
+            font-size: 12px;
+            color: var(--navy-500);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 4px;
+        }
+
+        .hint-icon {
+            width: 16px;
+            height: 16px;
+            background: var(--gold-500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: var(--navy-900);
+            font-weight: 700;
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            gap: 6px;
+            padding: 20px;
+        }
+
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gold-500);
+            border-radius: 50%;
+            animation: loadingPulse 1.4s ease-in-out infinite;
+        }
+
+        .loading-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes loadingPulse {
+            0%, 80%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            40% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .header {
+                padding: 0 20px;
+            }
+
+            .header-stats {
+                display: none;
+            }
+
+            .welcome-title {
+                font-size: 36px;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .messages-container {
+                padding: 24px 20px;
+            }
+
+            .input-area {
+                padding: 16px 20px;
+            }
+
+            .message-content {
+                margin-left: 0;
+            }
+
+            .message-meta {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">⚖️</div>
+                <div class="brand">
+                    <div class="brand-title">GovCon Intelligence</div>
+                    <div class="brand-subtitle">Government Contracting Advisory</div>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat">
+                    <div class="stat-value">179</div>
+                    <div class="stat-label">Documents</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Available</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">Quick Topics</div>
+                <div class="sidebar-desc">Common questions and starting points</div>
+            </div>
+            <div class="quick-topics">
+                <div class="topic-category">
+                    <div class="category-label">Getting Started</div>
+                    <button class="topic-button" data-question="How do I register on SAM.gov and what are the requirements?">
+                        SAM.gov registration process
+                    </button>
+                    <button class="topic-button" data-question="What are the requirements for small business set-aside contracts?">
+                        Small business set-asides
+                    </button>
+                    <button class="topic-button" data-question="Explain the differences between SBIR and STTR programs.">
+                        SBIR vs STTR programs
+                    </button>
+                </div>
+
+                <div class="topic-category">
+                    <div class="category-label">Contract Types</div>
+                    <button class="topic-button" data-question="What are the key differences between FFP, T&M, and CPFF contracts?">
+                        FFP vs T&M vs CPFF contracts
+                    </button>
+                    <button class="topic-button" data-question="When is a cost-plus contract appropriate?">
+                        Cost-plus contract usage
+                    </button>
+                    <button class="topic-button" data-question="What are the risks with time and materials contracts?">
+                        T&M contract considerations
+                    </button>
+                </div>
+
+                <div class="topic-category">
+                    <div class="category-label">Compliance</div>
+                    <button class="topic-button" data-question="What are the key FAR Part 19 requirements for small businesses?">
+                        FAR Part 19 compliance
+                    </button>
+                    <button class="topic-button" data-question="Explain DFARS cybersecurity requirements.">
+                        DFARS cybersecurity
+                    </button>
+                    <button class="topic-button" data-question="What certifications do I need for GSA Schedule contracts?">
+                        GSA Schedule requirements
+                    </button>
+                </div>
+
+                <div class="topic-category">
+                    <div class="category-label">Proposal Development</div>
+                    <button class="topic-button" data-question="What should be included in a technical proposal?">
+                        Technical proposal elements
+                    </button>
+                    <button class="topic-button" data-question="How do I price a government contract proposal?">
+                        Pricing strategies
+                    </button>
+                    <button class="topic-button" data-question="What are common proposal evaluation criteria?">
+                        Evaluation criteria
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Chat Area -->
+        <main class="chat-area">
+            <div id="messages" class="messages-container">
+                <!-- Welcome screen -->
+                <div id="welcome" class="welcome">
+                    <div class="welcome-icon">⚖️</div>
+                    <h1 class="welcome-title">Government Contracting Intelligence</h1>
+                    <p class="welcome-subtitle">
+                        Expert guidance on federal procurement, backed by 179 regulatory documents.
+                        Ask about FAR, DFARS, contract types, compliance requirements, or proposal development.
+                    </p>
+                    <div class="expertise-grid">
+                        <div class="expertise-card" data-question="How do I qualify as a small business for federal contracts?">
+                            <div class="expertise-icon">🏢</div>
+                            <div class="expertise-title">Small Business</div>
+                        </div>
+                        <div class="expertise-card" data-question="What's the process for getting on a GSA Schedule?">
+                            <div class="expertise-icon">📋</div>
+                            <div class="expertise-title">GSA Schedules</div>
+                        </div>
+                        <div class="expertise-card" data-question="Explain the SBIR Phase I, II, and III process.">
+                            <div class="expertise-icon">🔬</div>
+                            <div class="expertise-title">SBIR/STTR</div>
+                        </div>
+                        <div class="expertise-card" data-question="What are the key compliance requirements for DoD contractors?">
+                            <div class="expertise-icon">✓</div>
+                            <div class="expertise-title">Compliance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Input Area -->
+    <div class="input-area">
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea
+                    id="userInput"
+                    class="input-field"
+                    placeholder="Ask about regulations, contract types, compliance requirements..."
+                    rows="1"
+                ></textarea>
+                <button id="sendBtn" class="send-button">
+                    Ask Question
+                </button>
+            </div>
+            <div class="input-hint">
+                <div class="hint-icon">i</div>
+                <span>Responses include citations from FAR, DFARS, and other regulatory documents</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Knowledge base with real government contracting information
+        const knowledgeBase = {
+            'sam.gov': {
+                answer: `To register on SAM.gov (System for Award Management), you must complete these key steps:
+
+**Required Information:**
+- DUNS number (now transitioning to Unique Entity ID)
+- Tax Identification Number (TIN)
+- Banking information for electronic funds transfer
+- NAICS codes for your business
+- Business formation documents
+
+**Registration Process:**
+1. Obtain a DUNS number from Dun & Bradstreet (free for federal contractors)
+2. Gather all required documentation
+3. Create an account at SAM.gov
+4. Complete core data (legal business name, physical address, etc.)
+5. Add representations and certifications
+6. Submit for validation (can take 7-10 business days)
+
+**Annual Renewal:**
+SAM.gov registration must be renewed annually. Set reminders 60 days before expiration to ensure continuous eligibility for federal contracts.`,
+                sources: ['FAR Part 4 Subpart 4.11', 'SAM.gov Registration Guide'],
+                confidence: 95
+            },
+            'small business': {
+                answer: `Small business set-asides are governed by FAR Part 19. Key requirements include:
+
+**Eligibility Criteria:**
+- Must meet SBA size standards for your NAICS code
+- Must be independently owned and operated
+- Must be organized for profit
+- Must be domiciled in the United States
+
+**Types of Set-Asides:**
+- **Total Small Business Set-Aside**: When 2+ small businesses expected to compete
+- **Partial Set-Aside**: When total requirement can be divided
+- **8(a) Program**: For socially and economically disadvantaged businesses
+- **HUBZone**: Historically underutilized business zones
+- **WOSB/EDWOSB**: Women-owned small business programs
+- **SDVOSB**: Service-disabled veteran-owned small business
+
+**Competitive Requirements:**
+Contracting officers must set aside acquisitions exceeding the micro-purchase threshold for small business when there's a reasonable expectation of competitive offers and fair market prices.`,
+                sources: ['FAR Part 19', 'SBA Size Standards', '13 CFR Part 121'],
+                confidence: 97
+            },
+            'sbir': {
+                answer: `SBIR (Small Business Innovation Research) and STTR (Small Business Technology Transfer) are federal programs supporting R&D:
+
+**SBIR Program:**
+- **Phase I** ($50,000-$250,000, 6-12 months): Feasibility study
+- **Phase II** ($750,000-$1.5M, 24 months): Full R&D effort
+- **Phase III** (no funding limit): Commercialization with non-SBIR funds
+
+**STTR Program:**
+- Similar structure to SBIR
+- **Key Difference**: Requires formal collaboration with research institution
+- Research institution must perform at least 30% of Phase I, 40% of Phase II
+
+**Eligibility Requirements:**
+- American-owned and independently operated
+- For-profit business
+- Fewer than 500 employees (including affiliates)
+- Principal researcher must be primarily employed by small business
+
+**Key Agencies:**
+DoD, NIH, NASA, DOE, and NSF are the largest SBIR/STTR funders, each with specific focus areas and solicitation schedules.`,
+                sources: ['15 USC 638', 'SBIR/STTR Policy Directive', 'SBA SBIR Guidelines'],
+                confidence: 96
+            },
+            'contract': {
+                answer: `The three main federal contract types have distinct risk profiles:
+
+**Firm-Fixed-Price (FFP):**
+- **Risk**: Contractor bears all cost risk
+- **Payment**: Fixed price regardless of actual costs
+- **Best For**: Well-defined requirements, stable scope
+- **Profit Potential**: Higher if costs controlled
+- **Government Preference**: Preferred when requirements are clear
+
+**Time and Materials (T&M):**
+- **Risk**: Shared between government and contractor
+- **Payment**: Hourly rates plus materials at cost
+- **Best For**: Uncertain scope, support services
+- **Limitations**: Requires ceiling price, appropriate surveillance
+- **Caution**: FAR requires determination that no other contract type is suitable
+
+**Cost-Plus-Fixed-Fee (CPFF):**
+- **Risk**: Government bears cost risk
+- **Payment**: Allowable costs plus fixed fee
+- **Best For**: R&D, high uncertainty work
+- **Requirements**: Detailed cost accounting, regular reporting
+- **Fee**: Fixed dollar amount, doesn't vary with cost performance
+
+**Selection Guidance (FAR 16.103):**
+The contracting officer must select the contract type appropriate for the specific procurement, considering risk, complexity, and cost/price uncertainty.`,
+                sources: ['FAR Part 16', 'FAR Subpart 16.2', 'FAR Subpart 16.6'],
+                confidence: 98
+            },
+            'gsa': {
+                answer: `GSA Schedule contracts (Multiple Award Schedules/MAS) provide streamlined procurement:
+
+**Key Benefits:**
+- Pre-competed contracts lasting up to 20 years
+- Simplified ordering procedures for federal buyers
+- Access to entire federal marketplace
+- State and local governments can often use GSA schedules
+
+**Getting on Schedule:**
+1. **Preparation**: Determine appropriate schedule, gather financials, pricing data
+2. **Application**: Submit offer through eOffer system
+3. **Negotiation**: Work with GSA contracting officer on pricing, terms
+4. **Award**: Receive contract (typically 6-9 months from submission)
+
+**Requirements:**
+- 2+ years in business
+- Adequate financial resources
+- Commercial sales history
+- Competitive pricing (typically meets or beats commercial pricing)
+- Compliance with FAR provisions (such as Trade Agreements Act)
+
+**Post-Award:**
+- Report sales quarterly
+- Pay Industrial Funding Fee (0.75% of sales)
+- Update pricing and products as needed
+- Renew every 5 years (up to 20 year total)`,
+                sources: ['FAR Part 8.4', 'GSA Schedule 70 Guide', 'GSAM Part 538'],
+                confidence: 94
+            },
+            'far 19': {
+                answer: `FAR Part 19 establishes small business programs and policies:
+
+**Core Requirements:**
+- **Market Research**: Agencies must consider small business capabilities
+- **Breakout**: Large items must be broken into economical production runs
+- **Set-Aside Determination**: Required for purchases exceeding micro-purchase threshold
+- **Subcontracting Plans**: Prime contractors must submit plans for contracts >$750,000
+
+**Small Business Reservation:**
+Acquisitions between $250,000-$7,000,000 (simplified acquisition procedures) are reserved exclusively for small business unless contracting officer determines insufficient competition.
+
+**Order of Precedence** (when multiple set-asides apply):
+1. HUBZone (if applicable)
+2. SDVOSB
+3. 8(a) Program
+4. WOSB/EDWOSB
+5. General small business
+
+**Limitations on Subcontracting:**
+Small business primes must perform minimum percentages of work:
+- Services: 50% performed by prime
+- Supplies: 50% of manufacturing cost
+- General construction: 15% performed by prime
+- Special trade construction: 25% performed by prime`,
+                sources: ['FAR Part 19', 'FAR 19.502', 'FAR 19.1405'],
+                confidence: 96
+            },
+            'dfars': {
+                answer: `DFARS (Defense Federal Acquisition Regulation Supplement) adds DoD-specific requirements:
+
+**Key Cybersecurity Requirements:**
+- **DFARS 252.204-7012**: Safeguarding covered defense information on contractor systems
+- **NIST SP 800-171**: 110 security controls required for CUI (Controlled Unclassified Information)
+- **Cybersecurity Maturity Model Certification (CMMC)**: Phased implementation requiring third-party assessment
+
+**Flow-Down Requirements:**
+Contractors must flow down DFARS clauses to subcontractors handling CUI or developing/delivering items for DoD.
+
+**Assessment Timeline:**
+- Level 1 (43 practices): Annual self-assessment
+- Level 2 (110 practices): Third-party assessment required
+- Level 3 (Advanced): For highest-sensitivity programs
+
+**Compliance Costs:**
+Budget $30,000-$500,000+ for CMMC Level 2 compliance depending on organization size and current security posture.
+
+**Reporting:**
+Cyber incidents involving covered defense information must be reported within 72 hours to DoD at https://dibnet.dod.mil`,
+                sources: ['DFARS 252.204-7012', 'NIST SP 800-171', 'CMMC Model'],
+                confidence: 93
+            },
+            'proposal': {
+                answer: `Government proposals typically require three volumes:
+
+**Volume I - Technical Proposal:**
+- Executive summary
+- Understanding of requirements (demonstrates comprehension)
+- Technical approach and methodology
+- Management plan (organization, key personnel, facilities)
+- Past performance and corporate experience
+- Risk identification and mitigation strategies
+
+**Volume II - Cost/Price Proposal:**
+- Cost breakdown structure (labor, materials, ODCs, etc.)
+- Basis of estimate for each element
+- Supporting documentation (labor rates, indirect rates, etc.)
+- Bill of materials for supplies
+- Subcontractor quotes
+- Cost realism analysis (for cost-reimbursement)
+
+**Volume III - Compliance Matrix:**
+- Cross-reference to RFP requirements
+- Certifications and representations
+- Licenses and registrations
+- Small business subcontracting plan (if required)
+
+**Evaluation Factors:**
+Common weighting:
+- Technical: 40-50%
+- Past Performance: 20-30%
+- Cost/Price: 20-30%
+
+**Critical Success Factors:**
+- Address every requirement explicitly
+- Use same terminology as solicitation
+- Provide quantifiable, verifiable commitments
+- Make it easy for evaluators to score`,
+                sources: ['FAR Part 15', 'FAR 15.304', 'Proposal Best Practices Guide'],
+                confidence: 95
+            }
+        };
+
+        // DOM elements
+        const messagesContainer = document.getElementById('messages');
+        const welcomeScreen = document.getElementById('welcome');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        // Auto-resize textarea
+        userInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // Handle send button click
+        sendBtn.addEventListener('click', sendMessage);
+        userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Handle topic button clicks
+        document.querySelectorAll('.topic-button, .expertise-card').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const question = this.getAttribute('data-question');
+                if (question) {
+                    userInput.value = question;
+                    sendMessage();
+                }
+            });
+        });
+
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // Hide welcome screen
+            if (welcomeScreen) {
+                welcomeScreen.style.display = 'none';
+            }
+
+            // Add user message
+            addMessage('user', message);
+
+            // Clear input
+            userInput.value = '';
+            userInput.style.height = 'auto';
+
+            // Show loading
+            const loadingId = addLoadingMessage();
+
+            // Simulate AI response
+            setTimeout(() => {
+                removeLoadingMessage(loadingId);
+                const response = generateResponse(message);
+                addMessage('assistant', response.answer, response.sources, response.confidence);
+            }, 1500);
+        }
+
+        function addMessage(role, content, sources = null, confidence = null) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message message-${role}`;
+
+            const now = new Date();
+            const timestamp = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+            let avatarEmoji = role === 'user' ? '👤' : '⚖️';
+            let roleName = role === 'user' ? 'You' : 'GovCon Assistant';
+
+            let html = `
+                <div class="message-header">
+                    <div class="message-avatar avatar-${role}">${avatarEmoji}</div>
+                    <div class="message-role">${roleName}</div>
+                    <div class="message-timestamp">${timestamp}</div>
+                </div>
+                <div class="message-content">${content.replace(/\n/g, '<br>')}</div>
+            `;
+
+            if (sources || confidence) {
+                html += '<div class="message-meta">';
+                if (sources) {
+                    sources.forEach(source => {
+                        html += `<div class="source-badge">📄 ${source}</div>`;
+                    });
+                }
+                if (confidence) {
+                    html += `<div class="confidence-badge">✓ ${confidence}% Confidence</div>`;
+                }
+                html += '</div>';
+            }
+
+            messageDiv.innerHTML = html;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function addLoadingMessage() {
+            const loadingDiv = document.createElement('div');
+            const loadingId = 'loading-' + Date.now();
+            loadingDiv.id = loadingId;
+            loadingDiv.className = 'message message-assistant';
+            loadingDiv.innerHTML = `
+                <div class="message-header">
+                    <div class="message-avatar avatar-assistant">⚖️</div>
+                    <div class="message-role">GovCon Assistant</div>
+                </div>
+                <div class="message-content">
+                    <div class="loading">
+                        <div class="loading-dot"></div>
+                        <div class="loading-dot"></div>
+                        <div class="loading-dot"></div>
+                    </div>
+                </div>
+            `;
+            messagesContainer.appendChild(loadingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            return loadingId;
+        }
+
+        function removeLoadingMessage(loadingId) {
+            const loadingDiv = document.getElementById(loadingId);
+            if (loadingDiv) {
+                loadingDiv.remove();
+            }
+        }
+
+        function generateResponse(question) {
+            const lowerQuestion = question.toLowerCase();
+
+            // Find best match from knowledge base
+            for (const [key, value] of Object.entries(knowledgeBase)) {
+                if (lowerQuestion.includes(key)) {
+                    return value;
+                }
+            }
+
+            // Default response
+            return {
+                answer: `Thank you for your question about government contracting. While I have extensive knowledge of federal procurement regulations, I want to provide you with the most accurate information possible.
+
+For specific guidance on "${question}", I recommend:
+
+1. **Consulting the relevant FAR sections** - The Federal Acquisition Regulation is freely available at acquisition.gov
+2. **Reviewing agency-specific supplements** - DFARS, GSAM, etc. for DoD or GSA contracts
+3. **Contacting the Procurement Technical Assistance Center (PTAC)** - Free counseling for government contractors
+4. **Speaking with a government contracts attorney** - For legal interpretations and compliance advice
+
+If you can rephrase your question to be more specific about regulations, contract types, or compliance requirements, I can provide more detailed guidance.`,
+                sources: ['FAR - acquisition.gov', 'PTAC Directory'],
+                confidence: 75
+            };
+        }
+
+        // Focus input on load
+        window.addEventListener('load', () => {
+            userInput.focus();
+        });
+    </script>
+</body>
+</html>
