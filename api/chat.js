@@ -58,13 +58,13 @@ export default async function handler(req, res) {
         'X-Title': 'GovCon Intelligence'
       },
       body: JSON.stringify({
-        model: 'deepseek/deepseek-r1:free',
+        model: 'deepseek/deepseek-r1-0528:free',
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
           { role: 'user', content: question }
         ],
         temperature: 0.1,
-        max_tokens: 2048
+        max_tokens: 4096
       })
     });
 
