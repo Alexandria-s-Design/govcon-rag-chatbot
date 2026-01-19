@@ -981,6 +981,26 @@ Common weighting:
             }
         };
 
+        // API Configuration - Update this after Vercel deployment
+        const API_URL = 'https://govcon-rag-chatbot.vercel.app/api/chat';
+
+        // Format plain text - removes markdown symbols
+        function formatPlainText(content) {
+            if (!content) return '';
+            return content
+                .replace(/<think>[\s\S]*?<\/think>/gi, '')  // Remove DeepSeek thinking tags
+                .replace(/\*\*(.*?)\*\*/g, '$1')     // Remove **bold**
+                .replace(/__(.*?)__/g, '$1')          // Remove __bold__
+                .replace(/\*(.*?)\*/g, '$1')          // Remove *italic*
+                .replace(/_([^_\s][^_]*[^_\s])_/g, '$1')  // Remove _italic_
+                .replace(/^[-*] /gm, '• ')            // Convert - or * to bullets
+                .replace(/```[\s\S]*?```/g, '')       // Remove code blocks
+                .replace(/`([^`]+)`/g, '$1')          // Remove inline code
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Convert links to text
+                .replace(/^#{1,6}\s*/gm, '')          // Remove headers
+                .trim();
+        }
+
         // DOM elements
         const messagesContainer = document.getElementById('messages');
         const welcomeScreen = document.getElementById('welcome');
@@ -1013,7 +1033,7 @@ Common weighting:
             });
         });
 
-        function sendMessage() {
+        async function sendMessage() {
             const message = userInput.value.trim();
             if (!message) return;
 
@@ -1032,12 +1052,38 @@ Common weighting:
             // Show loading
             const loadingId = addLoadingMessage();
 
-            // Simulate AI response
-            setTimeout(() => {
+            try {
+                // Call the Vercel API
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: message })
+                });
+
                 removeLoadingMessage(loadingId);
-                const response = generateResponse(message);
-                addMessage('assistant', response.answer, response.sources, response.confidence);
-            }, 1500);
+
+                if (response.ok) {
+                    const data = await response.json();
+
+                    // Check if fallback is needed
+                    if (data.fallback) {
+                        const fallback = generateResponse(message);
+                        addMessage('assistant', formatPlainText(fallback.answer), fallback.sources, fallback.confidence);
+                    } else {
+                        addMessage('assistant', formatPlainText(data.answer), data.sources, data.confidence);
+                    }
+                } else {
+                    // API error - use local fallback
+                    const fallback = generateResponse(message);
+                    addMessage('assistant', formatPlainText(fallback.answer), fallback.sources, fallback.confidence);
+                }
+            } catch (error) {
+                // Network error - use local fallback
+                removeLoadingMessage(loadingId);
+                console.error('API Error:', error);
+                const fallback = generateResponse(message);
+                addMessage('assistant', formatPlainText(fallback.answer), fallback.sources, fallback.confidence);
+            }
         }
 
         function addMessage(role, content, sources = null, confidence = null) {
